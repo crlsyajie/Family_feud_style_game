@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Family Feud Game</title>
+</head>
+<body>
+
+<header id="game-header" class="bg-primary text-white text-center py-4">
+    <h1>Family Feud Game</h1>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Family Feud</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Rules</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Leaderboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="container mt-4">
+    <h2>Game Introduction</h2>
+    <p>The Family Feud Game is a fun way to test your knowledge of popular survey questions. Players will have a chance to guess answers that are most frequently given by a group of people, and points are awarded based on the popularity of the answers.</p>
+    
+    <div id="game-container" class="p-4" style="max-width: 800px; margin: auto;">
+        <h2>Game Setup</h2>
+        
+        <div id="current-question" class="alert alert-info" style="display: none;"></div> <!-- Added question display -->
+
+        <ul id="answer-list" class="list-group mb-3">
+            <!-- Answer placeholders will be filled dynamically -->
+            <li class="list-group-item">1. <span class="answer-placeholder">Answer 1</span></li>
+            <li class="list-group-item">2. <span class="answer-placeholder">Answer 2</span></li>
+            <li class="list-group-item">3. <span class="answer-placeholder">Answer 3</span></li>
+            <li class="list-group-item">4. <span class="answer-placeholder">Answer 4</span></li>
+        </ul>
+        
+        <form id="answer-form" method="POST" class="d-flex mb-3">
+            <input type="text" id="user-answer" class="form-control mr-2" placeholder="Enter your answer" required>
+            <button type="submit" id="submit-answer" class="btn btn-primary">Submit Answer</button>
+        </form>
+
+        <table class="table score-table text-center">
+            <thead>
+                <tr>
+                    <th>Team Names</th>
+                    <th>Scores</th>
+                </tr>
+            </thead>
+            <tbody id="score-table-body">
+                <tr>
+                    <td id="team-a-name">Team A</td>
+                    <td id="team-a-score">0</td>
+                </tr>
+                <tr>
+                    <td id="team-b-name">Team B</td>
+                    <td id="team-b-score">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="results" class="mt-3"></div>
+        
+        <footer>
+            <h3 id="game-status">Game Over!</h3>
+            <button id="start-game" class="btn btn-primary">Start Game</button>
+        </footer>
+        
+        <audio id="background-music" src="path_to_your_audio_file.mp3" loop></audio>
+        
+        <div class="team-controls d-flex justify-content-between">
+            <button id="pass" class="btn btn-secondary">Pass</button>
+            <button id="play" class="btn btn-success">Play</button>
+        </div>
+        
+        <form id="player-names-form" class="mt-3">
+            <label for="player-a-name">Team A Name:</label>
+            <input type="text" id="player-a-name" class="form-control mb-2" required>
+            <label for="player-b-name">Team B Name:</label>
+            <input type="text" id="player-b-name" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-primary">Set Names</button>
+        </form>
+        
+        <img src="path_to_your_buzzer_image.jpg" alt="Buzzer" class="img-fluid my-3" style="display: none;">
+        
+        <div id="countdown-timer" class="alert alert-warning" style="display: none;"></div>
+        
+        <div class="progress mt-3">
+            <div id="time-progress" class="progress-bar" role="progressbar" style="width: 100%"></div>
+        </div>
+    </div>
+</section>
+
+<script src="game.js"></script>
+</body>
+</html>

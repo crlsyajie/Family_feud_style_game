@@ -1,0 +1,29 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#game-header {
+    background-color: maroon; /* Maroon base color for the header */
+}
+
+#results {
+    background-color: #f8d7da; /* Light red background for results */
+    padding: 10px;
+}
+
+.alert {
+    margin-bottom: 20px;
+}
+
+.score-table {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add shadow to score table */
+}
+
+.btn {
+    border-radius: 5px; /* Rounded corners for buttons */
+}
+
+#countdown-timer {
+    font-size: 20px;
+    color: red; /* Make the timer stand out */
+}
