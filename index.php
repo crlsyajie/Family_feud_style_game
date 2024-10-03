@@ -1,44 +1,35 @@
 <?php
-// Start session for player details
-session_start();
+// index.php
 
-// Database connection
-$host = '127.0.0.1:4306';
-$dbname = 'game_scores';
-$username = 'root';
-$password = '';
+// Database connection (update with your own connection details)
+$servername = "127.0.0.1:4306";
+$username = "root"; 
+$password = ""; 
+$dbname = "family_fued"; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Could not connect to the database: " . $e->getMessage());
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle player score submission
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['player_name'], $_POST['score'])) {
-    $playerName = $_POST['player_name'];
-    $score = $_POST['score'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the team scores from the request
+    $team_a_score = intval($_POST['team_a_score']);
+    $team_b_score = intval($_POST['team_b_score']);
 
-    if (!empty($playerName) && !empty($score)) {
-        $stmt = $pdo->prepare("INSERT INTO scores (player_name, score) VALUES (?, ?)");
-        $stmt->execute([$playerName, $score]);
-        echo "Score saved successfully!";
+    // Insert the scores into the leaderboard table
+    $sql = "INSERT INTO leaderboard (team_a_score, team_b_score) VALUES ('$team_a_score', '$team_b_score')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Scores inserted successfully";
     } else {
-        echo "Please provide valid input.";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-}
 
-// Logout functionality
-if (isset($_GET['logout'])) {
-    session_destroy();
-    header('Location: index.php');
-    exit();
+    $conn->close();
 }
-
-// Fetch leaderboard data
-$leaderboardQuery = $pdo->query("SELECT player_name, score, game_date FROM scores ORDER BY score DESC LIMIT 10");
-$leaderboard = $leaderboardQuery->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -62,13 +53,7 @@ $leaderboard = $leaderboardQuery->fetchAll(PDO::FETCH_ASSOC);
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Rules</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Leaderboard</a>
+                    <a class="nav-link" href="leaderboard.php">Leaderboard</a>
                 </li>
             </ul>
         </div>
@@ -77,43 +62,56 @@ $leaderboard = $leaderboardQuery->fetchAll(PDO::FETCH_ASSOC);
 
 <section class="container mt-4">
     <h2>Game Introduction</h2>
-    <p>The Family Feud Game is a fun way to test your knowledge of popular survey questions. Players will have a chance to guess answers that are most frequently given by a group of people, and points are awarded based on the popularity of the answers.</p>
-    
+    <p>The Family Feud Game is a fun way to test your knowledge of popular survey questions.</p>
+
     <div id="game-container" class="p-4" style="max-width: 800px; margin: auto;">
-        <h2>Game Setup</h2>
+        <!-- Team name form -->
+        <form id="team-names-form" method="POST" class="mb-4">
+            <h3>Enter Team Names</h3>
+            <div class="form-group">
+                <label for="team-a-name">Team A Name:</label>
+                <input type="text" id="team-a-name" name="team_a_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="team-b-name">Team B Name:</label>
+                <input type="text" id="team-b-name" name="team_b_name" class="form-control" required>
+            </div>
+            <button type="submit" id="submit-names" class="btn btn-primary">Start Game</button>
+        </form>
 
-        <div id="current-question" class="alert alert-info" style="display: none;"></div> <!-- Question display -->
+        <!-- Game status -->
+        <div id="game-status" class="alert alert-info">Waiting for players...</div>
+
+        <!-- Question display -->
+        <div id="current-question" class="alert alert-info" style="display: none;"></div>
+
+        <!-- Timer -->
+        <div id="countdown-timer" class="alert alert-warning" style="display: none;"></div>
         
-        <!-- Leaderboard Table -->
-        <h3>Leaderboard</h3>
-        <table class="table score-table text-center">
-            <thead>
-                <tr>
-                    <th>Player Name</th>
-                    <th>Score</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($leaderboard as $entry): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($entry['player_name']) ?></td>
-                        <td><?= htmlspecialchars($entry['score']) ?></td>
-                        <td><?= htmlspecialchars($entry['game_date']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-
         <!-- Answer Form -->
-        <form id="answer-form" method="POST" class="d-flex mb-3">
+        <form id="answer-form" method="POST" class="d-flex mb-3" style="display:none;">
             <input type="text" id="user-answer" class="form-control mr-2" placeholder="Enter your answer" required>
             <button type="submit" id="submit-answer" class="btn btn-primary">Submit Answer</button>
         </form>
 
+        <!-- Scores -->
+        <h3>Scores</h3>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>Team A</th>
+                    <th>Team B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="team-a-score">0</td>
+                    <td id="team-b-score">0</td>
+                </tr>
+            </tbody>
+        </table>
+
         <footer>
-            <h3 id="game-status">Game Over!</h3>
-            <button id="start-game" class="btn btn-primary">Start Game</button>
             <a href="?logout=true" class="btn btn-danger">Logout</a>
         </footer>
     </div>
