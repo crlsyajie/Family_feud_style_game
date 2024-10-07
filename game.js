@@ -36,6 +36,9 @@ const player2NameDisplay = document.getElementById('player2-name-display');
 let selectedPlayer = null;
 let timerInterval;
 
+// Initially disable the buzzer button
+buzzerBtn.disabled = true;
+
 // Start Game
 startBtn.addEventListener('click', () => {
     const player1Name = player1NameInput.value.trim();
@@ -49,9 +52,12 @@ startBtn.addEventListener('click', () => {
     player1NameDisplay.innerText = player1Name;
     player2NameDisplay.innerText = player2Name;
     
-    buzzerBtn.disabled = false; // Enable buzzer button
-    getRandomQuestion();
+    buzzerBtn.disabled = false; // Enable buzzer button after game starts
+    getRandomQuestion(); // Get the first question
     resetGameUI();
+
+    // Disable the start button after the game starts
+    startBtn.disabled = true; 
 });
 
 // Buzzer Functionality
@@ -113,6 +119,7 @@ function checkAnswer() {
     }
 
     resetGame();
+    // Commenting this out to not fetch a new question automatically
     getRandomQuestion(); // Fetch a new question after the round
 }
 
@@ -127,7 +134,7 @@ passBtn.addEventListener('click', () => {
 // Get Random Question
 function getRandomQuestion() {
     currentQuestion = Math.floor(Math.random() * questions.length);
-    questionElement.innerText = questions[currentQuestion];
+    questionElement.innerText = questions[currentQuestion]; // Show the current question
 }
 
 // Reset the game for next round
@@ -152,7 +159,7 @@ function insertScoreIntoDatabase() {
     const player1Name = player1NameDisplay.innerText;
     const player2Name = player2NameDisplay.innerText;
     
-    fetch('game.php', {
+    fetch('db.php', {
         method: 'POST',
         body: JSON.stringify({
             player1Name: player1Name,

@@ -1,0 +1,166 @@
+/* General Styles */
+body {
+    background-image: url('./images/bgcurtain.png'); /* Add your background image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    font-family: 'Poppins', 'Roboto', sans-serif;
+    color: white;
+}
+
+
+/* Navbar */
+.navbar {
+    padding: 1.2rem;
+    background-color: maroon;
+}
+
+.navbar-brand {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ccc;
+}
+
+/* Logo Styles */
+.logo-img {
+    max-width: 50%;  /* Ensures the logo fits within the container */
+    height: 50%;     /* Maintains aspect ratio */
+    margin: 0;
+    padding: 0;
+}
+
+/* Player Name Input */
+#player1-name, #player2-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid maroon;
+    background-color: rgba(248, 249, 250, 0.8); /* Slightly transparent background */
+    color: #333;
+    width: 80%; /* Limits the width of the input fields */
+    margin: 0 auto; /* Centers the input fields */
+    padding: 10px; /* Add padding for better touch targets */
+    height: 50px; /* Increase the height of the input fields */
+}
+
+/* Start Button */
+#start-btn {
+    margin-top: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Add padding for better touch targets */
+    transition: background-color 0.3s;
+}
+
+#start-btn:hover {
+    background-color: #800000;
+}
+
+/* Buzzer Button */
+#buzzer-btn {
+    width: 200px; 
+    height: auto; 
+    transition: transform 0.2s ease; 
+    cursor: pointer; 
+    margin-top: 20px; /* Add margin for spacing */
+}
+
+#buzzer-btn:hover {
+    transform: scale(1.1) translateY(-5px); 
+}
+
+/* Custom Maroon Color */
+.bg-maroon {
+    background-color: maroon !important; /* Ensure it overrides Bootstrap */
+}
+
+.btn-maroon {
+    background-color: maroon; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+}
+
+.btn-maroon:hover {
+    background-color: darkred; /* Darker shade on hover */
+}
+
+/* Answer Input and Submit Button */
+#answer {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid maroon;
+    background-color: rgba(248, 249, 250, 0.8); /* Slightly transparent background */
+    color: #333;
+    padding: 10px; /* Add padding for better touch targets */
+    height: 50px; /* Increase the height of the answer input */
+    margin-top: 20px; /* Add some space above the answer input */
+}
+
+#question {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px; /* Font size for the question */
+    color: maroon;
+    margin: 20px 0; /* Add space above and below the question */
+    text-align: center; /* Center the question */
+}
+
+#submit-answer, #pass-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    height: 50px; /* Adjust button height */
+    margin: 10px; /* Add margin for spacing */
+    padding: 10px; /* Add padding for better touch targets */
+    transition: background-color 0.3s;
+}
+
+#submit-answer:hover, #pass-btn:hover {
+    background-color: #800000;
+}
+
+/* Timer Display */
+#timer {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: maroon;
+}
+
+/* Scoreboard */
+#player1-name-display, #player2-name-display {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: maroon;
+}
+
+#player1-score, #player2-score {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: maroon;
+}
+
+/* Border for Player Score Columns */
+.col .text-center {
+    border: 3px solid maroon;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.end-message{
+    margin-top: 20px;
+}

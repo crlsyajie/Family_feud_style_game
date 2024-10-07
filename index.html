@@ -5,95 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Family Feud Game</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Family Feud</a>
+        <a class="navbar-brand" href="#">FAMILY FEUD</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="scores.php">Leaderboard</a>
+                    <a class="nav-link" href="scores_handler.php">Leaderboard</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Player Name Input -->
+<!-- Game Show Logo -->
+<div class="container text-center mt-4">
+    <img src="images/gameshow.png" alt="Game Show Logo" class="logo-img">
+</div>
+
+<!-- Game Elements Box -->
 <div class="container mt-4">
-    <div class="row">
-        <div class="col text-center">
-            <input type="text" id="player1-name" class="form-control" placeholder="Enter Player 1 Name">
-        </div>
-        <div class="col text-center">
-            <input type="text" id="player2-name" class="form-control" placeholder="Enter Player 2 Name">
-        </div>
-    </div>
-</div>
-
-<!-- Game Start Button -->
-<div class="container text-center mt-3">
-    <button id="start-btn" class="btn btn-primary btn-lg">Start Game</button>
-</div>
-
-<!-- Question Display -->
-<div class="container text-center mt-4">
-    <h2 id="question" class="mb-4"></h2>
-</div>
-
-<!-- Buzzer Buttons -->
-<div class="container text-center mt-4">
-    <button id="buzzer-btn" class="btn btn-danger btn-lg" disabled>Buzz!</button>
-</div>
-
-<!-- Modal for Player Selection -->
-<div class="modal fade" id="playerModal" tabindex="-1" aria-labelledby="playerModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="playerModalLabel">Select Player</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="bg-light p-4  shadow" style="background-color: rgba(248, 249, 250, 0.3) !important; border-radius:20px;">
+        <!-- Player Name Input Fields -->
+        <div class="row">
+            <div class="col text-center">
+                <input type="text" id="player1-name" class="form-control mb-3" placeholder="Enter Player 1 Name">
             </div>
-            <div class="modal-body">
-                <button id="player1-btn" class="btn btn-primary">Player 1</button>
-                <button id="player2-btn" class="btn btn-secondary">Player 2</button>
+            <div class="col text-center">
+                <input type="text" id="player2-name" class="form-control mb-3" placeholder="Enter Player 2 Name">
             </div>
         </div>
+        <!-- Game Start Button -->
+        <div class="text-center">
+            <button id="start-btn" class="btn btn-primary btn-lg">Start Game</button>
+        </div>
+
+        <!-- Question Display -->
+        <div class="container text-center mt-4">
+            <h2 id="question" class="mb-4"></h2>
+        </div>
+
+        <!-- Buzzer Image -->
+        <div class="container text-center mt-4">
+            <img id="buzzer-btn" src="images/instant.png" alt="Buzz!" style="cursor: pointer; width: 200px; height: auto;" disabled>
+        </div>
+
+       <!-- Modal for Player Selection -->
+        <div class="modal fade" id="playerModal" tabindex="-1" aria-labelledby="playerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-maroon text-white">
+                        <h5 class="modal-title" id="playerModalLabel">Select Player</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p class="mb-4">Choose a player to answer the question:</p>
+                        <div class="d-flex justify-content-center">
+                            <button id="player1-btn" class="btn btn-maroon btn-lg me-3">Player 1</button>
+                            <button id="player2-btn" class="btn btn-maroon btn-lg">Player 2</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Answer Input and Submit -->
+        <div class="container text-center mt-4">
+            <input type="text" id="answer" class="form-control" placeholder="Type your answer here" disabled>
+            <button id="submit-answer" class="btn btn-success mt-3" disabled>Submit Answer</button>
+            <button id="pass-btn" class="btn btn-warning mt-3" disabled>Pass</button>
+        </div>
+
+        <!-- Timer Display -->
+        <div class="container text-center mt-4">
+            <h4>Time Remaining: <span id="timer">15</span> seconds</h4>
+        </div>
+
+        <!-- Scoreboard -->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col text-center">
+                    <h3><span id="player1-name-display">Player 1</span>: <span id="player1-score">0</span> points</h3>
+                </div>
+                <div class="col text-center">
+                    <h3><span id="player2-name-display">Player 2</span>: <span id="player2-score">0</span> points</h3>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Answer Input and Submit -->
-<div class="container text-center mt-4">
-    <input type="text" id="answer" class="form-control" placeholder="Type your answer here" disabled>
-    <button id="submit-answer" class="btn btn-success mt-3" disabled>Submit Answer</button>
-    <button id="pass-btn" class="btn btn-warning mt-3" disabled>Pass</button>
-</div>
-
-<!-- Timer Display -->
-<div class="container text-center mt-4">
-    <h4>Time Remaining: <span id="timer">15</span> seconds</h4>
-</div>
-
-<!-- Scoreboard -->
-<div class="container mt-4">
-    <div class="row">
-        <div class="col text-center">
-            <h3><span id="player1-name-display">Player 1</span>: <span id="player1-score">0</span> points</h3>
+<!-- Footer -->
+<footer class="text-center mt-4 p-3" style="background-color: maroon; color: white;">
+    <p>Developed by Carlos Yajie Fetizanan and John Vincent Laylo</p>
+        <div>
+            <a href="https://www.facebook.com" target="_blank" class="text-white me-2">
+                <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" class="text-white me-2">
+                <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="text-white">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
         </div>
-        <div class="col text-center">
-            <h3><span id="player2-name-display">Player 2</span>: <span id="player2-score">0</span> points</h3>
-        </div>
+    <div class="end-message">
+        <h2>All Reserve 2024</h2>
     </div>
-</div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
+<script src="game.js"></script>
 </body>
 </html>

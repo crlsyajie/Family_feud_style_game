@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 // database connection
 try {
-    $conn = new PDO('mysql:host=127.0.0.1:4306;dbname=familyfeud', 'root', '');
+    $conn = new PDO('mysql:host=127.0.0.1;dbname=familyfeud', 'root', '');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
