@@ -52,8 +52,8 @@ startBtn.addEventListener('click', () => {
     player1NameDisplay.innerText = player1Name;
     player2NameDisplay.innerText = player2Name;
     
-    buzzerBtn.disabled = false; // Enable buzzer button after game starts
-    getRandomQuestion(); // Get the first question
+    buzzerBtn.disabled = false; 
+    getRandomQuestion(); 
     resetGameUI();
 
     // Disable the start button after the game starts
@@ -78,23 +78,23 @@ function selectPlayer(player) {
     startTimer();
 }
 
-// Timer Functionality
+// Timer
 function startTimer() {
     let timeRemaining = 15;
     timerElement.innerText = timeRemaining;
     
-    clearInterval(timerInterval); // Clear previous interval if it exists
+    clearInterval(timerInterval);
     timerInterval = setInterval(() => {
         timeRemaining--;
         timerElement.innerText = timeRemaining;
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
-            checkAnswer(); // Check answer when timer runs out
+            checkAnswer(); 
         }
     }, 1000);
 }
 
-// Check the Answer
+// Checker
 submitAnswerBtn.addEventListener('click', checkAnswer);
 
 function checkAnswer() {
@@ -119,25 +119,24 @@ function checkAnswer() {
     }
 
     resetGame();
-    // Commenting this out to not fetch a new question automatically
-    getRandomQuestion(); // Fetch a new question after the round
+    getRandomQuestion(); 
 }
 
-// Pass the Question
+// pass
 passBtn.addEventListener('click', () => {
-    getRandomQuestion(); // Fetch a new question when passing
+    getRandomQuestion();
     answerInput.value = '';
-    clearInterval(timerInterval); // Stop the timer
-    resetGameUI(); // Reset inputs for the next question
+    clearInterval(timerInterval); 
+    resetGameUI(); 
 });
 
-// Get Random Question
+// random question
 function getRandomQuestion() {
     currentQuestion = Math.floor(Math.random() * questions.length);
-    questionElement.innerText = questions[currentQuestion]; // Show the current question
+    questionElement.innerText = questions[currentQuestion]; 
 }
 
-// Reset the game for next round
+// Reset 
 function resetGame() {
     answerInput.value = '';
     answerInput.disabled = true;
@@ -179,11 +178,11 @@ function insertScoreIntoDatabase() {
     });
 }
 
-// Get the music element and toggle button
+// music element
 const music = document.getElementById('background-music');
 const musicToggleButton = document.getElementById('music-toggle-btn');
 
-// Function to toggle mute/unmute music
+// mute/unmute music
 function toggleMusic() {
     if (music.muted) {
         music.muted = false;
