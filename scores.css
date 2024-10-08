@@ -1,11 +1,11 @@
-/* General Styles */
+/* general */
 body {
     background-color: #ffffff;
     font-family: 'Poppins', 'Roboto', sans-serif;
     color: #333;
 }
 
-/* Navbar */
+/* nav*/
 .navbar {
     padding: 1.2rem;
     background-color: maroon;
@@ -27,7 +27,7 @@ body {
     color: #ccc;
 }
 
-/* Leaderboard Title */
+/* leaderboard */
 h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 2.5rem;
@@ -35,13 +35,13 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Table Styles */
+/* table */
 .table {
     border: 2px solid maroon;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f8f9fa; /* Light gray for alternate rows */
+    background-color: #f8f9fa; 
 }
 
 .table thead th {
@@ -53,12 +53,12 @@ h1 {
     border: 1px solid maroon;
 }
 
-/* Responsive Table */
+/* table */
 .table-responsive {
     overflow-x: auto;
 }
 
-/* Footer (if needed) */
+/*footer */
 footer {
     margin-top: 20px;
     text-align: center;
