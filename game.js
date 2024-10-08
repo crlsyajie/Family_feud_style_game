@@ -179,3 +179,19 @@ function insertScoreIntoDatabase() {
     });
 }
 
+// Get the music element and toggle button
+const music = document.getElementById('background-music');
+const musicToggleButton = document.getElementById('music-toggle-btn');
+
+// Function to toggle mute/unmute music
+function toggleMusic() {
+    if (music.muted) {
+        music.muted = false;
+        musicToggleButton.innerText = "Mute Music";
+    } else {
+        music.muted = true;
+        musicToggleButton.innerText = "Unmute Music";
+    }
+}
+
+

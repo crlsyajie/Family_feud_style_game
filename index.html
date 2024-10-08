@@ -21,11 +21,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="scores_handler.php">Leaderboard</a>
                 </li>
             </ul>
+            <!-- Music Mute/Unmute Button on the right side -->
+            <button id="music-toggle-btn" class="btn btn-danger ms-auto" onclick="toggleMusic()">Mute Music</button>
         </div>
     </div>
 </nav>
@@ -126,6 +128,13 @@
         <h2>All Reserve 2024</h2>
     </div>
 </footer>
+
+<audio id="background-music" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<source src="music.mp3" type="audio/mpeg">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="game.js"></script>
