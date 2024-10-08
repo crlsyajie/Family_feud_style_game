@@ -159,7 +159,7 @@ function insertScoreIntoDatabase() {
     const player1Name = player1NameDisplay.innerText;
     const player2Name = player2NameDisplay.innerText;
     
-    fetch('db.php', {
+    fetch('game.php', {
         method: 'POST',
         body: JSON.stringify({
             player1Name: player1Name,
