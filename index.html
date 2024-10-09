@@ -23,7 +23,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="scores_handler.php">Leaderboard</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#instructionsModal">Instructions</a>
+                </li>
             </ul>
+
             <!-- Music Mute/Unmute Button on the right side -->
             <button id="music-toggle-btn" class="btn btn-danger ms-auto" onclick="toggleMusic()">Mute Music</button>
         </div>
@@ -35,9 +40,34 @@
     <img src="images/gameshow.png" alt="Game Show Logo" class="logo-img">
 </div>
 
+
+
+<!-- Instructions Modal -->
+<div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-maroon text-white">
+                <h5 class="modal-title" id="instructionsModalLabel">Game Instructions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>1. Enter the names of two players.</p>
+                <p>2. Press the start button to begin the game.</p>
+                <p>3. A question will appear, and players take turns answering.</p>
+                <p>4. Use the buzzer to select a player for answering.</p>
+                <p>5. Submit the answer or pass the question to the other player.</p>
+                <p>6. The game ends when a player reaches a winning score.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Game Elements Box -->
 <div class="container mt-4">
     <div class="bg-light p-4  shadow" style="background-color: rgba(248, 249, 250, 0.3) !important; border-radius:20px;">
+
+        
+
         <!-- Player Name Input Fields -->
         <div class="row">
             <div class="col text-center">
