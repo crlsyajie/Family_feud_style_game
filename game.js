@@ -111,7 +111,9 @@ function checkAnswer() {
         }
 
         if (player1Score >= 30 || player2Score >= 30) {
-            alert(`Player ${selectedPlayer === 1 ? player1NameDisplay.innerText : player2NameDisplay.innerText} wins!`);
+            const winnerName = selectedPlayer === 1 ? player1NameDisplay.innerText : player2NameDisplay.innerText;
+            document.getElementById('winnerMessage').innerText = `${winnerName} wins the game!`;
+            new bootstrap.Modal(document.getElementById('winnerModal')).show();
             insertScoreIntoDatabase();
         }
     } else {
