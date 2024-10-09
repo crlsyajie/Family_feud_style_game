@@ -150,7 +150,7 @@ function resetGameUI() {
     answerInput.disabled = true;
     submitAnswerBtn.disabled = true;
     passBtn.disabled = true;
-    timerElement.innerText = '15'; // Reset the timer display
+    timerElement.innerText = '15'; 
 }
 
 // Insert scores and player names into the database via AJAX
